@@ -19,6 +19,7 @@ module.exports = {
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new HtmlWebpackPlugin({
       title: "Development",
+      template: 'src/index.html'
     }),
     new MiniCssExtractPlugin({
       filename: "dist.bundle.css",
