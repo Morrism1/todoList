@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    
     <script defer src="main.js"></script>
     <title>Document</title>
   <script defer src="main.js"></script></head>
@@ -16,8 +17,21 @@
         <a class="navbar-brand text-white" href="#">ToDo</a>
       </div>
     </nav>
-    <section class="todo container">
-      <div class="row container d-flex justify-content-center">
+   
+    <section class="todo row container">
+      <div class=" col-3">
+        <ul class='projects' data-lists>
+  <li>hello</li>
+  <li>hii</li>
+        </ul>
+        <form class="form-group">
+          <div class="container">
+          <input type="text" class="input"></input>
+        </div>
+   <button type="submit" class="btn btn-primary ml-4 mt-4">Add Project</button>
+        </form>
+      </div>
+      <div class="row container d-flex justify-content-center col-9">
         <div class="card px-3 mt-5 w-100">
           <div class="card-body">
             <h4 class="card-title">Awesome Todo list</h4>
@@ -35,35 +49,38 @@
               </button>
             </div>
 
-            <div class="list-wrapper list-group container mt-5">
+            <div class="cards list-wrapper list-group container mt-5">
+              <tempalte>
               <div class="card">
                 <div class="card-body d-flex justify-content-between">
                   <div class="todo-title">Basic one</div>
                   <div class="px-4 d-flex justify-content-between">
                     <div class="span1 mr-2">
                       <a href="#" class="btn btn-primary">
-                        <i class="fas fa-edit"></i>
+                        <!--<i class="fas fa-edit"></i> -->
                       </a>
                     </div>
                     <div class="span1 mr-2">
                       <a href="#" class="btn btn-danger">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
+                       <!--<i class="fa fa-trash" aria-hidden="true"></i>--> 
                       </a>
                     </div>
                     <div class="span1">
                       <a href="#" class="btn btn-warning text-white">
-                        <i class="fa fa-flag" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-flag" aria-hidden="true"></i> -->
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
+            </tempalte>
             </div>
           </div>
         </div>
       </div>
+      
     </section>
-
+   
     <script
       src="https://kit.fontawesome.com/5b1eeceadd.js"
       crossorigin="anonymous"
