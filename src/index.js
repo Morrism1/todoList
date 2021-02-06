@@ -2,16 +2,19 @@ import "./style.css";
 
 const projects = document.querySelector("[data-lists]");
 const newProjectForm = document.querySelector("[data-project-form]");
+
 const newProjectInput = document.querySelector("[data-project-input]");
+
 const newProjectButton = document.querySelector("[data-project-button]");
+const newTaskForm =document.querySelector('[data-new-task-form]');
+const todoTemplate =document.querySelector('[data-todo-template]');
+const cards =document.querySelector('.cards');
 
 const LOCAL_STORAGE_PROJECT_KEY = "todo.lists";
 const LOCAL_STORAGE_SELECTED_ID_KEY = "todo.selectedId";
 
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || [];
-//let selectedId = JSON.parse(
- // localStorage.getItem(LOCAL_STORAGE_SELECTED_ID_KEY)
-//);
+
 let selectedId = localStorage.getItem(LOCAL_STORAGE_SELECTED_ID_KEY)
 
 
@@ -36,18 +39,31 @@ function createProject(name) {
 projects.addEventListener("click", (e) => {
     if (e.target.tagName.toLowerCase() === 'li') {
       selectedId = e.target.dataset.listId;
-      save();
-      renderP();
+      saveAndRender()
 
 
     }
   });
-
+function render()
+{
+  renderProjects();
+  const selectedProject =lists.find(list => list.id === selectedId) ;
+  if(selectedProject == null)
+  {
+cards.style.display= 'none';
+  }
+  else
+  {
+    cards.style.style ='';
+    clearList(cards);
+  renderTasks(selectedProject);
+  }
+}
 
 function saveAndRender() {
   save();
  
-  renderP();
+  render();
 }
 
 function save() {
@@ -56,8 +72,9 @@ function save() {
 }
 
 
-function renderP() {
+function renderProjects() {
     clearList(projects);
+    
   lists.forEach((list) => {
     const project = document.createElement("li");
     project.dataset.listId = list.id;
@@ -77,7 +94,7 @@ function clearList(list) {
   }
 }
 
-renderP();
+render();
 
 
 class AddTask
@@ -91,17 +108,21 @@ class AddTask
   }
 }
 
-const title =document.querySelector("#title");
-const description=document.querySelector('#description')
-const ddate =document.querySelector("#date");
-const priority =document.querySelector("#priority");
 
-const newTodo =new AddTask(title,description,ddate,priority);
 
 newTaskForm.addEventListener('submit', e=>
   {
-e.preventDefault;
+e.preventDefault();
 
+const title =document.querySelector("#title").value;
+const description=document.querySelector('#description').value;
+const ddate =document.querySelector("#date").value;
+const priority =document.querySelector("#priority").value;
+const todo =new AddTask(title,description,ddate,priority);
+console.log(todo);
+const selectedProject = lists.find(list =>list.id === selectedId);
+selectedProject.tasks.push(todo);
+saveAndRender();
   }
   )
 
@@ -124,3 +145,18 @@ window.onclick = function modalwrite(e) {
     modal.style.display = 'none';
   }
 };
+
+function renderTasks(selectedId)
+{
+  selectedId.tasks.forEach(task => {
+    const todoList = document.importNode(todoTemplate.content,true);
+    const todoTitle = todoList.querySelector(".card-title");
+    todoTitle.innerText = task.title;
+    const todoDescription = todoList.querySelector(".card-description");
+    todoDescription.innerText = task.description;
+    const todoPriority = todoList.querySelector(".card-priority");
+    todoPriority.innerText = task.priority;
+    cards.appendChild(todoList);
+  }
+    )
+}
