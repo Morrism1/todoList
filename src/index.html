@@ -19,13 +19,13 @@
 
   <section class="todo row container">
     <div class=" col-3">
-      <ul class='projects' data-lists>
+      <ul class='projects list-group' data-lists>
         <li>hello</li>
         <li>hii</li>
       </ul>
-      <form class="form-group" data-project-form>
+      <form class="form-group mt-3" data-project-form>
         <div class="container">
-          <input type="text" class="input" data-project-input></input>
+          <input type="text" class="input form-control" placeholder="Create new Project" data-project-input></input>
         </div>
         <button type="submit" class="btn btn-primary ml-4 mt-4" data-project-button>Add Project</button>
       </form>
@@ -44,6 +44,7 @@
       <div class="modal-content">
         <span class="close">&times;</span>
         <span class="ml-5 message"></span>
+        <h2 class='modal-title text-center'></h2>
         <form action="" name="form" data-new-task-form>
           <div class="form-group">
             <label for="title">Title:</label>
@@ -101,14 +102,15 @@
                 <div class="card-body">
                   <h5 class="card-title" ></h5>
                   <p class="card-text card-description"> </p>
-                  <p class="card-text card-priority"> </p>
+                  <p>Priority: <span class="card-text card-priority"> </span></p>
+                  
                   <div class="buttons d-flex justify-content-end">
-                  <a href="#" class="btn btn-primary mr-2">Edit</a>
+                  <a href="#" class="btn btn-primary mr-2 edit-btn">Edit</a>
                   <a href="#" class="btn btn-primary mr-2">Delete</a>
                 </div>
                 </div>
                 <div class="card-footer text-muted">
-                  2 days ago
+                  
                 </div>
               </div>
               
