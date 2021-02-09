@@ -16,10 +16,10 @@ const title = document.querySelector("#title");
 const description = document.querySelector("#description");
 const ddate = document.querySelector("#date");
 const priority = document.querySelector("#priority");
-const todoindex = document.querySelector('#todoindex');
+const todoindex = document.querySelector("#todoindex");
+const modalHeader = document.querySelector(".modal-title");
 
-const submit = document.querySelector('.submit')
- let todo;
+const submit = document.querySelector(".submit");
 
 const LOCAL_STORAGE_PROJECT_KEY = "todo.lists";
 const LOCAL_STORAGE_SELECTED_ID_KEY = "todo.selectedId";
@@ -73,8 +73,6 @@ function save() {
   localStorage.setItem(LOCAL_STORAGE_SELECTED_ID_KEY, selectedId);
 }
 
-
-
 function renderProjects() {
   clearList(projects);
 
@@ -105,53 +103,41 @@ class AddTask {
     this.description = description;
     this.ddate = ddate;
     this.priority = priority;
-    this.id = Date.now().toString()
-    
+    this.id = Date.now().toString();
   }
 }
 
 submit.addEventListener("click", (e) => {
   e.preventDefault();
-  if(submit.classList.contains('edit'))
-  { 
-    const editindex =todoindex.value;
+  if (submit.classList.contains("edit")) {
+    const editindex = todoindex.value;
     const selectedProject1 = lists.find((list) => list.id === selectedId);
-   const todo = selectedProject1.tasks[editindex];
-      todo.title = title.value;
-      todo.description = description.value;
-      todo.priority = priority.value;
-      todo.ddate = ddate.value;
-      
-      
-    
-      
-  
+    const todo = selectedProject1.tasks[editindex];
+    todo.title = title.value;
+    todo.description = description.value;
+    todo.priority = priority.value;
+    todo.ddate = ddate.value;
 
-    selectedProject1.tasks[editindex] =todo;
-    
-  
-  
-   
-    submit.classList.remove('edit');
+    selectedProject1.tasks[editindex] = todo;
+
+    submit.classList.remove("edit");
+  } else {
+    const title1 = title.value;
+    const description1 = description.value;
+    const ddate1 = ddate.value;
+    const priority1 = priority.value;
+    const newtodo = new AddTask(title1, description1, ddate1, priority1);
+    const selectedProject = lists.find((list) => list.id === selectedId);
+    selectedProject.tasks.push(newtodo);
   }
-else
-{
- const title1 = title.value;
- const  description1 = description.value;
-  const ddate1 = ddate.value;
-  const priority1 = priority.value;
-  const newtodo = new AddTask(title1, description1, ddate1, priority1);
-  const selectedProject = lists.find((list) => list.id === selectedId);
-  selectedProject.tasks.push(newtodo);
-
-}
-saveAndRender()
+  saveAndRender();
   modal.style.display = "none";
   newTaskForm.reset();
 });
 
 modalBtn.addEventListener("click", () => {
   modal.style.display = "block";
+  modalHeader.textContent = "New Todo";
 });
 
 closeModal.addEventListener("click", () => {
@@ -164,32 +150,21 @@ window.onclick = function modalwrite(e) {
   }
 };
 
-function editTodo(todo,index) {
+function editTodo(todo, index) {
   modalCloseState();
   title.value = todo.title;
   description.value = todo.description;
   priority.value = todo.priority;
   ddate.value = todo.ddate;
-  todoindex.value = index
-  // const selectedTaskId = lists.selectedProject.tasks.find(((task) => task.id === todo.id))
-  // index =lists.selectedProject.tasks.indexOf(selectedTaskId);
-submit.classList.add("edit");
-//   submit.addEventListener("submit", (e) => {
-//     console.log(todo);
-//     e.preventDefault();
-//     todo.title = title.value;
-//     todo.description = description.value;
-//     todo.priority = priority.value;
-//     todo.ddate = ddate.value;
-//     // const editindex =document.querySelector('#todoindex').value;
-//     // const selectedProject = lists.find((list) => list.id === selectedId);
-//     // const newTodo = new AddTask(todo.title,todo.description,todo.ddate,todo.priority)
+  todoindex.value = index;
+  submit.classList.add("edit");
+}
 
-    // selectedProject.tasks[editindex] =newTodo;
-    // save();
-   
-  // });
-  
+function deleteTask(index) {
+  const editindex = index;
+  const selectedProject1 = lists.find((list) => list.id === selectedId);
+  selectedProject1.tasks.splice(editindex, 1);
+  saveAndRender();
 }
 
 function renderTasks(selectedId) {
@@ -204,20 +179,18 @@ function renderTasks(selectedId) {
     todoPriority.classList.add("btn");
     const todoDdate = todoList.querySelector(".card-footer");
     todoDdate.innerText = `Due on ${task.ddate}`;
-   const editBtn = todoList.querySelector(".edit-btn");
-    let index =selectedId.tasks.indexOf(task)
-   
-   
- 
- //todo =task
-editBtn.addEventListener("click", () => editTodo(task, index));
+    const editBtn = todoList.querySelector(".edit-btn");
+    let index = selectedId.tasks.indexOf(task);
+
+    //todo =task
+    editBtn.addEventListener("click", () => editTodo(task, index));
+    const deleteTaskBtn = todoList.querySelector(".delete-btn");
+    deleteTaskBtn.addEventListener("click", () => deleteTask(index));
     cards.appendChild(todoList);
     addClass();
   });
 }
 
-
-  
 function addClass() {
   const elements = document.querySelectorAll(".card-priority");
 
@@ -232,7 +205,6 @@ function addClass() {
     }
   });
 }
-
 
 let modalOpen = false;
 
