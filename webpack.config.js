@@ -1,28 +1,28 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: "development",
-  entry: { index: "./src/index.js" },
+  mode: 'development',
+  entry: { index: './src/index.js' },
   output: {
-    filename: "main.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
   },
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   devServer: {
     writeToDisk: true,
-    contentBase: "./dist",
+    contentBase: './dist',
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new HtmlWebpackPlugin({
-      title: "Development",
-      template: 'src/index.html'
+      title: 'Development',
+      template: 'src/index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: "dist.bundle.css",
+      filename: 'dist.bundle.css',
     }),
   ],
   module: {
@@ -31,16 +31,16 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules)/, // Set loaders to transform files.
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env"],
+            presets: ['@babel/preset-env'],
           },
         },
       },
       {
         test: /\.css$/i,
         exclude: /(node_modules)/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

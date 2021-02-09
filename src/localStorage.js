@@ -1,13 +1,11 @@
-import { render } from "./index";
 
-const LOCAL_STORAGE_PROJECT_KEY = "todo.lists";
-const LOCAL_STORAGE_SELECTED_ID_KEY = "todo.selectedId";
+const LOCAL_STORAGE_PROJECT_KEY = 'todo.lists';
+const LOCAL_STORAGE_SELECTED_ID_KEY = 'todo.selectedId';
 
-const cards = document.querySelector(".cards");
 
-let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || [];
+const lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || [];
 
-let selectedId = localStorage.getItem(LOCAL_STORAGE_SELECTED_ID_KEY);
+const selectedId = localStorage.getItem(LOCAL_STORAGE_SELECTED_ID_KEY);
 
 function save() {
   localStorage.setItem(LOCAL_STORAGE_PROJECT_KEY, JSON.stringify(lists));
@@ -20,9 +18,7 @@ function clearList(list) {
   }
 }
 
-function saveAndRender() {
-  render();
-  save();
-}
 
-export { lists, selectedId, save, saveAndRender, clearList };
+export {
+  lists, selectedId, save, clearList,
+};
