@@ -1,3 +1,6 @@
+import { lists, saveAndRender, clearList } from "./localStorage";
+import { AddTask, editTodo, deleteTask, addClass } from "./addtodo";
+import createProject from "./addproject";
 import "./style.css";
 
 const projects = document.querySelector("[data-lists]");
@@ -21,10 +24,7 @@ const modalHeader = document.querySelector(".modal-title");
 
 const submit = document.querySelector(".submit");
 
-const LOCAL_STORAGE_PROJECT_KEY = "todo.lists";
 const LOCAL_STORAGE_SELECTED_ID_KEY = "todo.selectedId";
-
-let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || [];
 
 let selectedId = localStorage.getItem(LOCAL_STORAGE_SELECTED_ID_KEY);
 
@@ -38,20 +38,14 @@ newProjectForm.addEventListener("submit", (e) => {
   saveAndRender();
 });
 
-function createProject(name) {
-  return {
-    id: Date.now().toString(),
-    name: name,
-    tasks: [],
-  };
-}
 projects.addEventListener("click", (e) => {
   if (e.target.tagName.toLowerCase() === "li") {
     selectedId = e.target.dataset.listId;
     saveAndRender();
   }
 });
-function render() {
+
+export function render() {
   renderProjects();
   const selectedProject = lists.find((list) => list.id === selectedId);
   if (selectedProject == null) {
@@ -63,17 +57,7 @@ function render() {
   }
 }
 
-function saveAndRender() {
-  render();
-  save();
-}
-
-function save() {
-  localStorage.setItem(LOCAL_STORAGE_PROJECT_KEY, JSON.stringify(lists));
-  localStorage.setItem(LOCAL_STORAGE_SELECTED_ID_KEY, selectedId);
-}
-
-function renderProjects() {
+export function renderProjects() {
   clearList(projects);
 
   lists.forEach((list) => {
@@ -89,23 +73,7 @@ function renderProjects() {
   });
 }
 
-function clearList(list) {
-  while (list.firstChild) {
-    list.removeChild(list.firstChild);
-  }
-}
-
 render();
-
-class AddTask {
-  constructor(title, description, ddate, priority) {
-    this.title = title;
-    this.description = description;
-    this.ddate = ddate;
-    this.priority = priority;
-    this.id = Date.now().toString();
-  }
-}
 
 submit.addEventListener("click", (e) => {
   e.preventDefault();
@@ -138,36 +106,22 @@ submit.addEventListener("click", (e) => {
 modalBtn.addEventListener("click", () => {
   modal.style.display = "block";
   modalHeader.textContent = "New Todo";
+  newTaskForm.reset();
 });
 
 closeModal.addEventListener("click", () => {
   modal.style.display = "none";
+  newTaskForm.reset();
 });
 
 window.onclick = function modalwrite(e) {
   if (e.target === modal) {
     modal.style.display = "none";
+    newTaskForm.reset();
   }
 };
 
-function editTodo(todo, index) {
-  modalCloseState();
-  title.value = todo.title;
-  description.value = todo.description;
-  priority.value = todo.priority;
-  ddate.value = todo.ddate;
-  todoindex.value = index;
-  submit.classList.add("edit");
-}
-
-function deleteTask(index) {
-  const editindex = index;
-  const selectedProject1 = lists.find((list) => list.id === selectedId);
-  selectedProject1.tasks.splice(editindex, 1);
-  saveAndRender();
-}
-
-function renderTasks(selectedId) {
+export function renderTasks(selectedId) {
   selectedId.tasks.forEach((task) => {
     const todoList = document.importNode(todoTemplate.content, true);
     const todoTitle = todoList.querySelector(".card-title");
@@ -189,38 +143,4 @@ function renderTasks(selectedId) {
     cards.appendChild(todoList);
     addClass();
   });
-}
-
-function addClass() {
-  const elements = document.querySelectorAll(".card-priority");
-
-  elements.forEach((element) => {
-    console.log(element.textContent);
-    if (element.textContent === "high") {
-      return element.classList.add("btn-success");
-    } else if (element.textContent === "medium") {
-      return element.classList.add("btn-warning");
-    } else {
-      return element.classList.add("btn-danger");
-    }
-  });
-}
-
-let modalOpen = false;
-
-function modalCloseState() {
-  const modalHeader = document.querySelector(".modal-title");
-
-  if (modalOpen) {
-    modal.style.pointerEvents = "none";
-    modal.style.transform = "scale(0)";
-    modalOpen = false;
-  } else {
-    modalHeader.textContent = "Update Todo";
-    newTaskForm.value = "Update";
-    modal.style.pointerEvents = "auto";
-    modal.style.transform = "scale(1)";
-    modal.style.display = "block";
-    modalOpen = true;
-  }
 }
