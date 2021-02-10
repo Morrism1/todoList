@@ -1,4 +1,3 @@
-import { lists, selectedId, save } from './localStorage';
 
 class AddTask {
   constructor(title, description, ddate, priority) {
@@ -47,7 +46,6 @@ function editTodo(todo, index) {
   todoindex.value = index;
   submit.classList.add('edit');
 }
-
 
 
 function addClass() {

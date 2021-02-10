@@ -1,6 +1,7 @@
 # todoList
-This is a Todo List app with features of adding projects and add tasks inside any preferred project. The todo objects are created dynamically.The application  has a title, description, due date, and priority options
-Your ‘todos’ are going to be objects that you’ll want to dynamically create, which means either using factories or constructors/classes to generate them.
+This is a Todo List app with features of adding projects and add tasks inside any preferred project. The todo objects are created dynamically.The application  has a title, description, due date, and priority options.
+
+
 ## Built With
 
 - HTML5
