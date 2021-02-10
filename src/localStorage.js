@@ -5,11 +5,14 @@ const LOCAL_STORAGE_SELECTED_ID_KEY = 'todo.selectedId';
 
 const lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || [];
 
-const selectedId = localStorage.getItem(LOCAL_STORAGE_SELECTED_ID_KEY);
+// let selectedId = localStorage.getItem(LOCAL_STORAGE_SELECTED_ID_KEY);
+const object = {
+  selectedId: localStorage.getItem(LOCAL_STORAGE_SELECTED_ID_KEY),
+};
 
 function save() {
   localStorage.setItem(LOCAL_STORAGE_PROJECT_KEY, JSON.stringify(lists));
-  localStorage.setItem(LOCAL_STORAGE_SELECTED_ID_KEY, selectedId);
+  localStorage.setItem(LOCAL_STORAGE_SELECTED_ID_KEY, object.selectedId);
 }
 
 function clearList(list) {
@@ -20,5 +23,5 @@ function clearList(list) {
 
 
 export {
-  lists, selectedId, save, clearList,
+  lists, object, save, clearList,
 };
