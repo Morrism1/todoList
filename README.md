@@ -14,7 +14,7 @@ This is a Todo List app with features of adding projects and add tasks inside an
 
 ## Live Demo
 
-[Live Demo](https://nervous-benz-753a29.netlify.app/)
+[Live Demo](https://morrism1.github.io/todoList)
 
 ## Getting Started
 
