@@ -29,7 +29,6 @@ const modalHeader = document.querySelector('.modal-title');
 const submit = document.querySelector('.submit');
 
 
-
 function deleteTask(todo, card) {
   const editindex = todo.value;
   const selectedProject1 = lists.find((list) => list.id === object.selectedId);
@@ -61,7 +60,6 @@ export function renderTasks(selectedId) {
     editBtn.addEventListener('click', () => editTodo(task, index));
     const deleteTaskBtn = todoList.querySelector('.delete-btn');
     deleteTaskBtn.addEventListener('click', () => {
-      
       deleteTask(todoindex, card);
     });
     cards.appendChild(todoList);
@@ -103,7 +101,16 @@ function saveAndRender() {
   render();
   save();
 }
+function defaultProject() {
+  if (lists.length === 0) {
+    const project = createProject('Default');
+    object.selectedId = project.id;
+    lists.push(project);
+    saveAndRender();
+  }
+}
 
+defaultProject();
 
 newProjectForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -116,6 +123,7 @@ newProjectForm.addEventListener('submit', (e) => {
 });
 
 projects.addEventListener('click', (e) => {
+  e.preventDefault();
   if (e.target.tagName.toLowerCase() === 'li') {
     object.selectedId = e.target.dataset.listId;
     saveAndRender();
