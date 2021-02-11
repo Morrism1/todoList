@@ -7,7 +7,7 @@ import {
   submit,
   modal,
   newTaskForm,
-} from "./dom";
+} from './dom';
 
 class AddTask {
   constructor(title, description, ddate, priority) {
@@ -21,19 +21,19 @@ class AddTask {
 
 let modalOpen = false;
 const modalCloseState = () => {
-  const modalHeader = document.querySelector(".modal-title");
+  const modalHeader = document.querySelector('.modal-title');
 
   if (modalOpen) {
-    modal.style.pointerEvents = "none";
-    modal.style.transform = "scale(0)";
+    modal.style.pointerEvents = 'none';
+    modal.style.transform = 'scale(0)';
     modalOpen = false;
     newTaskForm.reset();
   } else {
-    modalHeader.textContent = "Update Todo";
-    newTaskForm.value = "Update";
-    modal.style.pointerEvents = "auto";
-    modal.style.transform = "scale(1)";
-    modal.style.display = "block";
+    modalHeader.textContent = 'Update Todo';
+    newTaskForm.value = 'Update';
+    modal.style.pointerEvents = 'auto';
+    modal.style.transform = 'scale(1)';
+    modal.style.display = 'block';
     modalOpen = true;
     newTaskForm.reset();
   }
@@ -46,20 +46,20 @@ const editTodo = (todo, index) => {
   priority.value = todo.priority;
   ddate.value = todo.ddate;
   todoindex.value = index;
-  submit.classList.add("edit");
+  submit.classList.add('edit');
 };
 
 const addClass = () => {
-  const elements = document.querySelectorAll(".card-priority");
+  const elements = document.querySelectorAll('.card-priority');
 
   elements.forEach((element) => {
-    if (element.textContent === "high") {
-      return element.classList.add("btn-success");
+    if (element.textContent === 'high') {
+      return element.classList.add('btn-success');
     }
-    if (element.textContent === "medium") {
-      return element.classList.add("btn-warning");
+    if (element.textContent === 'medium') {
+      return element.classList.add('btn-warning');
     }
-    return element.classList.add("btn-danger");
+    return element.classList.add('btn-danger');
   });
 };
 
