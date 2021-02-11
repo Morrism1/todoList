@@ -1,3 +1,6 @@
+import {
+  title, description, ddate, priority, todoindex, submit, modal, newTaskForm,
+} from './dom';
 
 class AddTask {
   constructor(title, description, ddate, priority) {
@@ -9,16 +12,16 @@ class AddTask {
   }
 }
 
-const title = document.querySelector('#title');
-const description = document.querySelector('#description');
-const ddate = document.querySelector('#date');
-const priority = document.querySelector('#priority');
-const todoindex = document.querySelector('#todoindex');
-const submit = document.querySelector('.submit');
-const modal = document.querySelector('#myModal');
-const newTaskForm = document.querySelector('[data-new-task-form]');
+// const title = document.querySelector('#title');
+// const description = document.querySelector('#description');
+// const ddate = document.querySelector('#date');
+// const priority = document.querySelector('#priority');
+// const todoindex = document.querySelector('#todoindex');
+// const submit = document.querySelector('.submit');
+// const modal = document.querySelector('#myModal');
+// const newTaskForm = document.querySelector('[data-new-task-form]');
 let modalOpen = false;
-function modalCloseState() {
+const modalCloseState = () => {
   const modalHeader = document.querySelector('.modal-title');
 
   if (modalOpen) {
@@ -35,9 +38,9 @@ function modalCloseState() {
     modalOpen = true;
     newTaskForm.reset();
   }
-}
+};
 
-function editTodo(todo, index) {
+const editTodo = (todo, index) => {
   modalCloseState();
   title.value = todo.title;
   description.value = todo.description;
@@ -45,10 +48,10 @@ function editTodo(todo, index) {
   ddate.value = todo.ddate;
   todoindex.value = index;
   submit.classList.add('edit');
-}
+};
 
 
-function addClass() {
+const addClass = () => {
   const elements = document.querySelectorAll('.card-priority');
 
   elements.forEach((element) => {
@@ -59,7 +62,7 @@ function addClass() {
     }
     return element.classList.add('btn-danger');
   });
-}
+};
 
 
 export {

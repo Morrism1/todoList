@@ -1,35 +1,30 @@
 import {
+  title,
+  description,
+  ddate,
+  priority,
+  todoindex,
+  submit,
+  modal,
+  newTaskForm,
+  newProjectInput,
+  projects,
+  newProjectForm,
+  todoTemplate,
+  cards,
+  modalBtn,
+  closeModal,
+  modalHeader,
+} from './dom';
+import {
   lists, save, object, clearList,
 } from './localStorage';
-import {
-  AddTask, editTodo, addClass,
-} from './addtodo';
+import { AddTask, editTodo, addClass } from './addtodo';
 import createProject from './addproject';
 import './style.css';
 
-const projects = document.querySelector('[data-lists]');
-const newProjectForm = document.querySelector('[data-project-form]');
 
-const newProjectInput = document.querySelector('[data-project-input]');
-
-const newTaskForm = document.querySelector('[data-new-task-form]');
-const todoTemplate = document.querySelector('[data-todo-template]');
-const cards = document.querySelector('.cards');
-const modal = document.querySelector('#myModal');
-
-const modalBtn = document.querySelector('#myBtn');
-const closeModal = document.querySelector('.close');
-const title = document.querySelector('#title');
-const description = document.querySelector('#description');
-const ddate = document.querySelector('#date');
-const priority = document.querySelector('#priority');
-const todoindex = document.querySelector('#todoindex');
-const modalHeader = document.querySelector('.modal-title');
-
-const submit = document.querySelector('.submit');
-
-
-function deleteTask(todo, card) {
+const deleteTask = (todo, card) => {
   const editindex = todo.value;
   const selectedProject1 = lists.find((list) => list.id === object.selectedId);
   selectedProject1.tasks.splice(editindex, 1);
@@ -39,8 +34,8 @@ function deleteTask(todo, card) {
   }
   save();
   cards.removeChild(card);
-}
-export function renderTasks(selectedId) {
+};
+const renderTasks = (selectedId) => {
   selectedId.tasks.forEach((task) => {
     const todoList = document.importNode(todoTemplate.content, true);
     const card = todoList.querySelector('.card');
@@ -56,7 +51,6 @@ export function renderTasks(selectedId) {
     const editBtn = todoList.querySelector('.edit-btn');
     const index = selectedId.tasks.indexOf(task);
 
-
     editBtn.addEventListener('click', () => editTodo(task, index));
     const deleteTaskBtn = todoList.querySelector('.delete-btn');
     deleteTaskBtn.addEventListener('click', () => {
@@ -65,10 +59,9 @@ export function renderTasks(selectedId) {
     cards.appendChild(todoList);
     addClass();
   });
-}
+};
 
-
-export function renderProjects() {
+const renderProjects = () => {
   clearList(projects);
 
   lists.forEach((list) => {
@@ -82,8 +75,8 @@ export function renderProjects() {
     }
     projects.appendChild(project);
   });
-}
-export function render() {
+};
+const render = () => {
   renderProjects();
   const selectedProject = lists.find((list) => list.id === object.selectedId);
   if (selectedProject == null) {
@@ -93,22 +86,21 @@ export function render() {
     clearList(cards);
     renderTasks(selectedProject);
   }
-}
-
+};
 
 render();
-function saveAndRender() {
+const saveAndRender = () => {
   render();
   save();
-}
-function defaultProject() {
+};
+const defaultProject = () => {
   if (lists.length === 0) {
     const project = createProject('Default');
     object.selectedId = project.id;
     lists.push(project);
     saveAndRender();
   }
-}
+};
 
 defaultProject();
 
@@ -129,7 +121,6 @@ projects.addEventListener('click', (e) => {
     saveAndRender();
   }
 });
-
 
 submit.addEventListener('click', (e) => {
   e.preventDefault();

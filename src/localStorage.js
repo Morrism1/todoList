@@ -10,16 +10,16 @@ const object = {
   selectedId: localStorage.getItem(LOCAL_STORAGE_SELECTED_ID_KEY),
 };
 
-function save() {
+const save = () => {
   localStorage.setItem(LOCAL_STORAGE_PROJECT_KEY, JSON.stringify(lists));
   localStorage.setItem(LOCAL_STORAGE_SELECTED_ID_KEY, object.selectedId);
-}
+};
 
-function clearList(list) {
+const clearList = (list) => {
   while (list.firstChild) {
     list.removeChild(list.firstChild);
   }
-}
+};
 
 
 export {
