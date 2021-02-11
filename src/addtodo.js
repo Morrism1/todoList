@@ -1,6 +1,13 @@
 import {
-  title, description, ddate, priority, todoindex, submit, modal, newTaskForm,
-} from './dom';
+  title,
+  description,
+  ddate,
+  priority,
+  todoindex,
+  submit,
+  modal,
+  newTaskForm,
+} from "./dom";
 
 class AddTask {
   constructor(title, description, ddate, priority) {
@@ -12,29 +19,21 @@ class AddTask {
   }
 }
 
-// const title = document.querySelector('#title');
-// const description = document.querySelector('#description');
-// const ddate = document.querySelector('#date');
-// const priority = document.querySelector('#priority');
-// const todoindex = document.querySelector('#todoindex');
-// const submit = document.querySelector('.submit');
-// const modal = document.querySelector('#myModal');
-// const newTaskForm = document.querySelector('[data-new-task-form]');
 let modalOpen = false;
 const modalCloseState = () => {
-  const modalHeader = document.querySelector('.modal-title');
+  const modalHeader = document.querySelector(".modal-title");
 
   if (modalOpen) {
-    modal.style.pointerEvents = 'none';
-    modal.style.transform = 'scale(0)';
+    modal.style.pointerEvents = "none";
+    modal.style.transform = "scale(0)";
     modalOpen = false;
     newTaskForm.reset();
   } else {
-    modalHeader.textContent = 'Update Todo';
-    newTaskForm.value = 'Update';
-    modal.style.pointerEvents = 'auto';
-    modal.style.transform = 'scale(1)';
-    modal.style.display = 'block';
+    modalHeader.textContent = "Update Todo";
+    newTaskForm.value = "Update";
+    modal.style.pointerEvents = "auto";
+    modal.style.transform = "scale(1)";
+    modal.style.display = "block";
     modalOpen = true;
     newTaskForm.reset();
   }
@@ -47,24 +46,21 @@ const editTodo = (todo, index) => {
   priority.value = todo.priority;
   ddate.value = todo.ddate;
   todoindex.value = index;
-  submit.classList.add('edit');
+  submit.classList.add("edit");
 };
 
-
 const addClass = () => {
-  const elements = document.querySelectorAll('.card-priority');
+  const elements = document.querySelectorAll(".card-priority");
 
   elements.forEach((element) => {
-    if (element.textContent === 'high') {
-      return element.classList.add('btn-success');
-    } if (element.textContent === 'medium') {
-      return element.classList.add('btn-warning');
+    if (element.textContent === "high") {
+      return element.classList.add("btn-success");
     }
-    return element.classList.add('btn-danger');
+    if (element.textContent === "medium") {
+      return element.classList.add("btn-warning");
+    }
+    return element.classList.add("btn-danger");
   });
 };
 
-
-export {
-  AddTask, editTodo, addClass,
-};
+export { AddTask, editTodo, addClass };
