@@ -10,74 +10,21 @@ import {
   newProjectInput,
   projects,
   newProjectForm,
-  todoTemplate,
   cards,
   modalBtn,
   closeModal,
   modalHeader,
+  renderTasks,
+  validateForm,
+  renderProjects,
+  spanMessage,
 } from './dom';
 
-import {
-  lists, save, object, clearList,
-} from './localStorage';
-import {
-  AddTask, editTodo, addClass, validateForm,
-} from './addtodo';
+import { lists, save, object, clearList } from './localStorage';
+import AddTask from './addtodo';
 import createProject from './addproject';
 import './style.css';
 
-const deleteTask = (todo, card) => {
-  const editindex = todo.value;
-  const selectedProject1 = lists.find((list) => list.id === object.selectedId);
-  selectedProject1.tasks.splice(editindex, 1);
-
-  if (submit.classList.contains('edit')) {
-    submit.classList.remove('edit');
-  }
-  save();
-  cards.removeChild(card);
-};
-const renderTasks = (selectedId) => {
-  selectedId.tasks.forEach((task) => {
-    const todoList = document.importNode(todoTemplate.content, true);
-    const card = todoList.querySelector('.card');
-    const todoTitle = todoList.querySelector('.card-title');
-    todoTitle.innerText = task.title;
-    const todoDescription = todoList.querySelector('.card-description');
-    todoDescription.innerText = task.description;
-    const todoPriority = todoList.querySelector('.card-priority');
-    todoPriority.innerText = task.priority;
-    todoPriority.classList.add('btn');
-    const todoDdate = todoList.querySelector('.card-footer');
-    todoDdate.innerText = `Due on ${task.ddate}`;
-    const editBtn = todoList.querySelector('.edit-btn');
-    const index = selectedId.tasks.indexOf(task);
-
-    editBtn.addEventListener('click', () => editTodo(task, index));
-    const deleteTaskBtn = todoList.querySelector('.delete-btn');
-    deleteTaskBtn.addEventListener('click', () => {
-      deleteTask(todoindex, card);
-    });
-    cards.appendChild(todoList);
-    addClass();
-  });
-};
-
-const renderProjects = () => {
-  clearList(projects);
-
-  lists.forEach((list) => {
-    const project = document.createElement('li');
-    project.dataset.listId = list.id;
-    project.classList.add('list-group-item');
-    project.setAttribute('role', 'button');
-    project.innerText = list.name;
-    if (list.id === object.selectedId) {
-      project.classList.add('active');
-    }
-    projects.appendChild(project);
-  });
-};
 const render = () => {
   renderProjects();
   const selectedProject = lists.find((list) => list.id === object.selectedId);
@@ -129,7 +76,7 @@ submit.addEventListener('click', (e) => {
   if (submit.classList.contains('edit')) {
     const editindex = todoindex.value;
     const selectedProject1 = lists.find(
-      (list) => list.id === object.selectedId,
+      (list) => list.id === object.selectedId
     );
     const todo = selectedProject1.tasks[editindex];
     todo.title = title.value;
@@ -152,9 +99,10 @@ submit.addEventListener('click', (e) => {
     const selectedProject = lists.find((list) => list.id === object.selectedId);
 
     selectedProject.tasks.push(newtodo);
-
-    modal.style.display = 'none';
+    spanMessage.innerHTML = '';
+    spanMessage.classList.remove('alert', 'alert-danger');
     newTaskForm.reset();
+    modal.style.display = 'none';
   }
   saveAndRender();
 });

@@ -1,10 +1,7 @@
-
 const LOCAL_STORAGE_PROJECT_KEY = 'todo.lists';
 const LOCAL_STORAGE_SELECTED_ID_KEY = 'todo.selectedId';
 
-
 const lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || [];
-
 
 const object = {
   selectedId: localStorage.getItem(LOCAL_STORAGE_SELECTED_ID_KEY),
@@ -20,7 +17,6 @@ const clearList = (list) => {
     list.removeChild(list.firstChild);
   }
 };
-
 
 export {
   lists, object, save, clearList,
