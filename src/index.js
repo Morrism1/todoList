@@ -19,7 +19,7 @@ import {
 import {
   lists, save, object, clearList,
 } from './localStorage';
-import { AddTask, editTodo, addClass } from './addtodo';
+import { AddTask, editTodo, addClass, validateForm } from './addtodo';
 import createProject from './addproject';
 import './style.css';
 
@@ -136,23 +136,33 @@ submit.addEventListener('click', (e) => {
     selectedProject1.tasks[editindex] = todo;
 
     submit.classList.remove('edit');
+     
+  newTaskForm.reset();
+    modal.style.display = 'none';
   } else {
+    if (validateForm())
+    {
     const title1 = title.value;
     const description1 = description.value;
     const ddate1 = ddate.value;
     const priority1 = priority.value;
     const newtodo = new AddTask(title1, description1, ddate1, priority1);
     const selectedProject = lists.find((list) => list.id === object.selectedId);
+  
     selectedProject.tasks.push(newtodo);
+
+    modal.style.display = 'none';
+      newTaskForm.reset();
+    }
   }
   saveAndRender();
-  modal.style.display = 'none';
-  newTaskForm.reset();
+ 
 });
 
 modalBtn.addEventListener('click', () => {
   modal.style.display = 'block';
   modalHeader.textContent = 'New Todo';
+  submit.innerHTML = 'Add';
   newTaskForm.reset();
 });
 

@@ -11,15 +11,30 @@ class AddTask {
     this.id = Date.now().toString();
   }
 }
+const validateForm = () => {
+  
+  const x = title.value;
+  const y = description.value;
+  const z = ddate.value;
+  const spanMessage = document.querySelector('.message');
+  if (x === '') {
+    spanMessage.innerHTML = 'Please fill the Title field';
+    spanMessage.classList.add('alert', 'alert-danger');
+    return false;
+  }
+  if (y === '') {
+    spanMessage.innerHTML = 'Please fill the description field';
+    spanMessage.classList.add('alert', 'alert-danger');
+    return false;
+  }
+  if (z === '') {
+    spanMessage.innerHTML = 'Please fill the due date field';
+    spanMessage.classList.add('alert', 'alert-danger');
+    return false;
+  }
+  return true;
+}
 
-// const title = document.querySelector('#title');
-// const description = document.querySelector('#description');
-// const ddate = document.querySelector('#date');
-// const priority = document.querySelector('#priority');
-// const todoindex = document.querySelector('#todoindex');
-// const submit = document.querySelector('.submit');
-// const modal = document.querySelector('#myModal');
-// const newTaskForm = document.querySelector('[data-new-task-form]');
 let modalOpen = false;
 const modalCloseState = () => {
   const modalHeader = document.querySelector('.modal-title');
@@ -27,11 +42,12 @@ const modalCloseState = () => {
   if (modalOpen) {
     modal.style.pointerEvents = 'none';
     modal.style.transform = 'scale(0)';
-    modalOpen = false;
+  modalOpen = false;
     newTaskForm.reset();
   } else {
     modalHeader.textContent = 'Update Todo';
     newTaskForm.value = 'Update';
+    submit.innerHTML = 'update';
     modal.style.pointerEvents = 'auto';
     modal.style.transform = 'scale(1)';
     modal.style.display = 'block';
@@ -66,5 +82,5 @@ const addClass = () => {
 
 
 export {
-  AddTask, editTodo, addClass,
+  AddTask, editTodo, addClass,validateForm
 };
