@@ -20,7 +20,9 @@ import {
   spanMessage,
 } from './dom';
 
-import { lists, save, object, clearList } from './localStorage';
+import {
+  lists, save, object, clearList,
+} from './localStorage';
 import AddTask from './addtodo';
 import createProject from './addproject';
 import './style.css';
@@ -76,7 +78,7 @@ submit.addEventListener('click', (e) => {
   if (submit.classList.contains('edit')) {
     const editindex = todoindex.value;
     const selectedProject1 = lists.find(
-      (list) => list.id === object.selectedId
+      (list) => list.id === object.selectedId,
     );
     const todo = selectedProject1.tasks[editindex];
     todo.title = title.value;
