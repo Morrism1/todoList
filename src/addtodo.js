@@ -1,5 +1,12 @@
 import {
-  title, description, ddate, priority, todoindex, submit, modal, newTaskForm,
+  title,
+  description,
+  ddate,
+  priority,
+  todoindex,
+  submit,
+  modal,
+  newTaskForm,
 } from './dom';
 
 class AddTask {
@@ -12,7 +19,6 @@ class AddTask {
   }
 }
 const validateForm = () => {
-  
   const x = title.value;
   const y = description.value;
   const z = ddate.value;
@@ -33,7 +39,7 @@ const validateForm = () => {
     return false;
   }
   return true;
-}
+};
 
 let modalOpen = false;
 const modalCloseState = () => {
@@ -42,7 +48,7 @@ const modalCloseState = () => {
   if (modalOpen) {
     modal.style.pointerEvents = 'none';
     modal.style.transform = 'scale(0)';
-  modalOpen = false;
+    modalOpen = false;
     newTaskForm.reset();
   } else {
     modalHeader.textContent = 'Update Todo';
@@ -66,14 +72,14 @@ const editTodo = (todo, index) => {
   submit.classList.add('edit');
 };
 
-
 const addClass = () => {
   const elements = document.querySelectorAll('.card-priority');
 
   elements.forEach((element) => {
     if (element.textContent === 'high') {
       return element.classList.add('btn-success');
-    } if (element.textContent === 'medium') {
+    }
+    if (element.textContent === 'medium') {
       return element.classList.add('btn-warning');
     }
     return element.classList.add('btn-danger');
@@ -82,5 +88,5 @@ const addClass = () => {
 
 
 export {
-  AddTask, editTodo, addClass,validateForm
+  AddTask, editTodo, addClass, validateForm,
 };

@@ -16,13 +16,15 @@ import {
   closeModal,
   modalHeader,
 } from './dom';
+
 import {
   lists, save, object, clearList,
 } from './localStorage';
-import { AddTask, editTodo, addClass, validateForm } from './addtodo';
+import {
+  AddTask, editTodo, addClass, validateForm,
+} from './addtodo';
 import createProject from './addproject';
 import './style.css';
-
 
 const deleteTask = (todo, card) => {
   const editindex = todo.value;
@@ -126,7 +128,9 @@ submit.addEventListener('click', (e) => {
   e.preventDefault();
   if (submit.classList.contains('edit')) {
     const editindex = todoindex.value;
-    const selectedProject1 = lists.find((list) => list.id === object.selectedId);
+    const selectedProject1 = lists.find(
+      (list) => list.id === object.selectedId,
+    );
     const todo = selectedProject1.tasks[editindex];
     todo.title = title.value;
     todo.description = description.value;
@@ -136,27 +140,23 @@ submit.addEventListener('click', (e) => {
     selectedProject1.tasks[editindex] = todo;
 
     submit.classList.remove('edit');
-     
-  newTaskForm.reset();
+
+    newTaskForm.reset();
     modal.style.display = 'none';
-  } else {
-    if (validateForm())
-    {
+  } else if (validateForm()) {
     const title1 = title.value;
     const description1 = description.value;
     const ddate1 = ddate.value;
     const priority1 = priority.value;
     const newtodo = new AddTask(title1, description1, ddate1, priority1);
     const selectedProject = lists.find((list) => list.id === object.selectedId);
-  
+
     selectedProject.tasks.push(newtodo);
 
     modal.style.display = 'none';
-      newTaskForm.reset();
-    }
+    newTaskForm.reset();
   }
   saveAndRender();
- 
 });
 
 modalBtn.addEventListener('click', () => {
