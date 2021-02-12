@@ -1,6 +1,4 @@
-import {
-  lists, object, clearList, save,
-} from './localStorage';
+import { lists, object, clearList, save } from './localStorage';
 
 const title = document.querySelector('#title');
 const description = document.querySelector('#description');
@@ -136,7 +134,8 @@ const renderTasks = (selectedId) => {
     editBtn.addEventListener('click', () => editTodo(task, index));
     const deleteTaskBtn = todoList.querySelector('.delete-btn');
     deleteTaskBtn.addEventListener('click', () => {
-      todoindex.value = index;
+      const deleteIndex = selectedId.tasks.indexOf(task);
+      todoindex.value = deleteIndex;
       deleteTask(todoindex, card);
     });
     cards.appendChild(todoList);
