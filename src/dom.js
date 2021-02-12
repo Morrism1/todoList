@@ -1,4 +1,6 @@
-import { lists, object, clearList, save } from './localStorage';
+import {
+  lists, object, clearList, save,
+} from './localStorage';
 
 const title = document.querySelector('#title');
 const description = document.querySelector('#description');
