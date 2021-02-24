@@ -23,7 +23,7 @@ import {
 import {
   lists, save, object, clearList,
 } from './localStorage';
-import AddTask from './addtodo';
+import { AddTask } from './addtodo';
 import createProject from './addproject';
 import './style.css';
 
