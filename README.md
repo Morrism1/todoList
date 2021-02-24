@@ -36,6 +36,12 @@ Accessing the application requires a running server. This can easily be achieved
 - install code editor
 - Browser
 
+## Testing
+
+- Run `npm install` to install required packages for testing and for the whole project.
+- Run `npm run test` to run the tests
+- Tests are located in `src/test`.
+
 ## Author Details
 
 👤 **Lidya Ghebreigziabher**

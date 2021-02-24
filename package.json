@@ -10,14 +10,19 @@
     "build:prod": "export NODE_ENV=production && webpack --mode production"
   },
   "jest": {
-    "modulePaths": ["/shared/vendor/modules"],
-    "moduleFileExtensions": ["js", "jsx"],
-    "moduleDirectories": ["node_modules", "bower_components", "shared"]
-
-   
-
-    },
-  
+    "modulePaths": [
+      "/shared/vendor/modules"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "shared"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Morrism1/todoList.git"
