@@ -21,7 +21,19 @@ const modalBtn = document.querySelector('#myBtn');
 const closeModal = document.querySelector('.close');
 const modalHeader = document.querySelector('.modal-title');
 const spanMessage = document.querySelector('.message');
-
+const domR = () => {
+  const newTaskForm = document.querySelector('[data-new-task-form]');
+  const title = document.querySelector('#title');
+  const description = document.querySelector('#description');
+  const ddate = document.querySelector('#date');
+  const priority = document.querySelector('#priority');
+  const todoindex = document.querySelector('#todoindex');
+  const submit = document.querySelector('.submit');
+  const modal = document.querySelector('#myModal');
+  return {
+    newTaskForm, title, description, ddate, priority, todoindex, submit, modal,
+  };
+};
 const validateForm = () => {
   const x = title.value;
   const y = description.value;
@@ -54,8 +66,9 @@ const modalCloseState = () => {
     modalOpen = false;
     newTaskForm.reset();
   } else {
+    const { newTaskForm, submit, modal } = domR();
     modalHeader.textContent = 'Update Todo';
-    newTaskForm.value = 'Update';
+
     submit.innerHTML = 'update';
     modal.style.pointerEvents = 'auto';
     modal.style.transform = 'scale(1)';
@@ -67,6 +80,9 @@ const modalCloseState = () => {
 
 const editTodo = (todo, index) => {
   modalCloseState();
+  const {
+    title, description, priority, ddate, todoindex, submit,
+  } = domR();
   title.value = todo.title;
   description.value = todo.description;
   priority.value = todo.priority;
@@ -88,7 +104,13 @@ const addClass = () => {
     return element.classList.add('btn-danger');
   });
 };
+// const deleteT = (todo,lists) =>
+// { const editindex = todo.value;
+//   const selectedProject1 = lists.find((list) => list.id === object.selectedId);
+//   selectedProject1.tasks.splice(editindex, 1);
+//   return selectedProject1;
 
+// }
 const deleteTask = (todo, card) => {
   const editindex = todo.value;
   const selectedProject1 = lists.find((list) => list.id === object.selectedId);
@@ -166,4 +188,5 @@ export {
   renderTasks,
   validateForm,
   renderProjects,
+  editTodo,
 };
