@@ -8,4 +8,4 @@ class AddTask {
   }
 }
 
-module.exports = AddTask;
+export default AddTask;
