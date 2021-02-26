@@ -35,15 +35,15 @@ test('if it edits the fields', () => {
 
   const title = document.getElementById('title');
 
-    const description = document.querySelector('#description');
-    const ddate = document.querySelector('#date');
-    const priority = document.querySelector('#priority');
-    const todoindex = document.querySelector('#todoindex');
+  const description = document.querySelector('#description');
+  const ddate = document.querySelector('#date');
+  const priority = document.querySelector('#priority');
+  const todoindex = document.querySelector('#todoindex');
 
   editTodo(todo, index);
   expect(title.value).toBe('code');
   expect(description.value).toBe('coding');
   expect(ddate.value).not.toEqual('23/2/2021');
   expect(priority.value).toBe('high');
-  expect(todoindex.value).toBe("2");
+  expect(todoindex.value).toBe('2');
 });

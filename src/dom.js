@@ -104,13 +104,7 @@ const addClass = () => {
     return element.classList.add('btn-danger');
   });
 };
-// const deleteT = (todo,lists) =>
-// { const editindex = todo.value;
-//   const selectedProject1 = lists.find((list) => list.id === object.selectedId);
-//   selectedProject1.tasks.splice(editindex, 1);
-//   return selectedProject1;
 
-// }
 const deleteTask = (todo, card) => {
   const editindex = todo.value;
   const selectedProject1 = lists.find((list) => list.id === object.selectedId);
@@ -189,4 +183,5 @@ export {
   validateForm,
   renderProjects,
   editTodo,
+  deleteTask,
 };
