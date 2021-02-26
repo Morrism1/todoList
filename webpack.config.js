@@ -26,6 +26,8 @@ module.exports = {
     }),
   ],
   module: {
+
+
     rules: [
       {
         test: /\.js$/,
@@ -44,4 +46,6 @@ module.exports = {
       },
     ],
   },
+
+
 };
