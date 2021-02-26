@@ -21,7 +21,9 @@
       "node_modules",
       "bower_components",
       "shared"
-    ]
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   },
   "repository": {
     "type": "git",
