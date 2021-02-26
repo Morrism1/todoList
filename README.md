@@ -1,5 +1,7 @@
 # todoList
 
+[![Build Status](https://travis-ci.com/Morrism1/todoList.svg?branch=chore%2Fwebpack)](https://travis-ci.com/Morrism1/todoList)
+
 This is a Todo List app with features of adding projects and add tasks inside any preferred project. The todo objects are created dynamically.The application has a title, description, due date, and priority options.
 
 ![screely-1612971825229](https://user-images.githubusercontent.com/46853433/107533491-aa043b00-6bc7-11eb-811a-8a1d833fbe80.png)
